@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const NavMenu: FC<Props> = ({ isAuth, handleAuth }) => {
-    const { auth, home, users, recipes } = urlEndpoints;
+    const { auth, home, allUsers, allRecipes } = urlEndpoints;
 
     return (
         <nav className='nav-menu'>
@@ -18,8 +18,8 @@ export const NavMenu: FC<Props> = ({ isAuth, handleAuth }) => {
                 <li><Link className='link' to={home}>Home</Link></li>
                 {isAuth &&
                     <>
-                        <li><Link className='link' to={users}>Users</Link></li>
-                        <li><Link className='link' to={recipes}>Recipes</Link></li>
+                        <li><Link className='link' to={allUsers}>Users</Link></li>
+                        <li><Link className='link' to={allRecipes}>Recipes</Link></li>
                     </>
                 }
             </ul>

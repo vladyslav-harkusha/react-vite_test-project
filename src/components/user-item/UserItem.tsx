@@ -1,8 +1,17 @@
 import {FC} from "react";
 import './UserItem.scss';
+import {IUser} from "../../models/IUser.ts";
 
-export const UserItem: FC = () => {
+type Props = {
+    user: IUser;
+}
+
+export const UserItem: FC<Props> = ({ user }) => {
+    const { id, firstName, lastName } = user;
+
     return (
-        <li>User item</li>
+        <li>
+            <h4>{id}: {firstName} {lastName}</h4>
+        </li>
     );
 };

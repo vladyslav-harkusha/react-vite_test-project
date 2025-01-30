@@ -10,16 +10,16 @@ import {UserDetailsPage} from "../pages/user-details-page/UserDetailsPage.tsx";
 import {RecipeDetailsPage} from "../pages/recipe-details-page/RecipeDetailsPage.tsx";
 
 export const AppRoutes: FC = () => {
-    const { auth, home, users, userById, recipes, recipeById } = urlEndpoints;
+    const { auth, home, allUsers, userById, allRecipes, recipeById } = urlEndpoints;
 
     return (
         <Routes>
             <Route path={home} element={ <MainTemplate /> } >
                 <Route index element={ <HomePage /> } />
                 <Route path={auth} element={ <AuthPage /> } />
-                <Route path={users} element={ <UsersPage /> } />
+                <Route path={allUsers} element={ <UsersPage /> } />
                 <Route path={userById} element={ <UserDetailsPage /> } />
-                <Route path={recipes} element={ <RecipesPage /> } />
+                <Route path={allRecipes} element={ <RecipesPage /> } />
                 <Route path={recipeById} element={ <RecipeDetailsPage /> } />
             </Route>
         </Routes>

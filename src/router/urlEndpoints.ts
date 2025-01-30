@@ -1,8 +1,8 @@
 export const urlEndpoints = {
     home: '',
     auth: '/auth',
-    users: '/auth/users',
+    allUsers: '/users',
     userById: '/auth/users/:userId',
-    recipes: '/auth/recipes',
+    allRecipes: '/recipes',
     recipeById: '/auth/recipes/:recipeId',
 };
