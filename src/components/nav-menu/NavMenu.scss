@@ -1,0 +1,19 @@
+.nav-menu {
+    .links-list {
+        display: flex;
+        gap: 50px;
+
+        li {
+            color: wheat;
+            font-weight: bold;
+
+            .link {
+                text-decoration: none;
+
+                &:visited {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
