@@ -1,0 +1,25 @@
+.auth-form {
+    .inputs-wrapper {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+        }
+    }
+
+    .select-label {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .auth-form-submit-button {
+        padding: 10px 30px;
+        background-color: teal;
+        color: lightyellow;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 2px solid wheat;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
