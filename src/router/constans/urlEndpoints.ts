@@ -1,8 +1,10 @@
 export const urlEndpoints = {
     home: '',
     auth: '/auth',
-    allUsers: '/users',
+    login: '/auth/login',
+    refresh: '/auth/refresh',
+    allUsers: '/auth/users',
     userById: '/auth/users/:userId',
-    allRecipes: '/recipes',
+    allRecipes: '/auth/recipes',
     recipeById: '/auth/recipes/:recipeId',
 };

@@ -1,18 +1,19 @@
-import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
-import {getAuthData} from "../../services/api.service.ts";
+import {createAsyncThunk, createSlice, isFulfilled, isPending, isRejected, PayloadAction} from "@reduxjs/toolkit";
+import {getLoginData} from "../../services/api.service.ts";
 import {IAuthResponseWithTokens} from "../../models/IAuthResponseWithTokens.ts";
 import {ILoginData} from "../../models/ILoginData.ts";
 
 type AuthUserStateType = {
     authUser: IAuthResponseWithTokens | null;
     isAuthUserLoading: boolean;
+    isAuthError: boolean;
 }
 
-const initialAuthUserState: AuthUserStateType = { authUser: null, isAuthUserLoading: false };
+const initialAuthUserState: AuthUserStateType = { authUser: null, isAuthUserLoading: false, isAuthError: false };
 
 const logInUser = createAsyncThunk('logInUser', async (authData: ILoginData, thunkAPI) => {
     try {
-        const authUser = await getAuthData(authData);
+        const authUser = await getLoginData(authData);
 
         return thunkAPI.fulfillWithValue(authUser);
     } catch (e) {
@@ -26,6 +27,12 @@ export const authSlice = createSlice({
     reducers: {
         handleIsAuthUserLoading: (state, action: PayloadAction<boolean>) => {
             state.isAuthUserLoading = action.payload;
+        },
+        logOutUser: (state) => {
+            state.authUser = null;
+        },
+        handleIsAuthError: (state, action: PayloadAction<boolean>) => {
+            state.isAuthError = action.payload;
         }
     },
     extraReducers: builder => builder
@@ -41,7 +48,12 @@ export const authSlice = createSlice({
         })
         .addMatcher(isPending(logInUser), (state) => {
             state.isAuthUserLoading = true;
+            state.isAuthError = false;
+        })
+        .addMatcher(isRejected(logInUser), (state) => {
+            state.isAuthUserLoading = false;
+            state.isAuthError = true;
         })
 });
 
-export const usersActions = { ...authSlice.actions, logInUser };
+export const authActions = { ...authSlice.actions, logInUser, };

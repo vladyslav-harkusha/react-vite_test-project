@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
 import {getAllEntities} from "../../services/api.service.ts";
-import {urlEndpoints} from "../../router/urlEndpoints.ts";
+import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 import {IUser} from "../../models/IUser.ts";
 import {IUsersResponse} from "../../models/IUsersResponse.ts";
 
@@ -27,7 +27,7 @@ export const usersSlice = createSlice({
     reducers: {
         handleIsUsersLoading: (state, action: PayloadAction<boolean>) => {
             state.isUsersLoading = action.payload;
-        }
+        },
     },
     extraReducers: builder => builder
         .addCase(loadAllUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {

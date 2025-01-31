@@ -4,22 +4,25 @@
 
         label {
             display: block;
+
+            p {
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .input-error-message {
+                color: firebrick;
+            }
+            input {
+                display: block;
+            }
+        }
+        .auth-error-message {
+            color: firebrick;
         }
     }
 
     .select-label {
         display: block;
         margin-bottom: 20px;
-    }
-
-    .auth-form-submit-button {
-        padding: 10px 30px;
-        background-color: teal;
-        color: lightyellow;
-        font-weight: bold;
-        text-transform: uppercase;
-        border: 2px solid wheat;
-        border-radius: 10px;
-        cursor: pointer;
     }
 }

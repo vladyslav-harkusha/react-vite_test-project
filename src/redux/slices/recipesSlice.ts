@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
 import {getAllEntities} from "../../services/api.service.ts";
-import {urlEndpoints} from "../../router/urlEndpoints.ts";
+import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 import {IRecipesResponse} from "../../models/IRecipesResponse.ts";
 import {IRecipe} from "../../models/IRecipe.ts";
 

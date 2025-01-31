@@ -1,19 +1,16 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import './Header.scss';
 import {NavMenu} from "../nav-menu/NavMenu.tsx";
 import {AuthUserHeaderInfo} from "../auth-user-header-info/AuthUserHeaderInfo.tsx";
+import {useAppSelector} from "../../redux/store.ts";
 
 export const Header: FC = () => {
-    const [isAuth, setIsAuth] = useState<boolean>(true);
-
-    const handleAuth = () => {
-        setIsAuth(prevState => !prevState);
-    };
+    const { authUser } = useAppSelector(store => store.authStoreSlice);
 
     return (
         <header className='app-header'>
-            <NavMenu isAuth={isAuth} handleAuth={handleAuth} />
-            {isAuth && <AuthUserHeaderInfo />}
+            <NavMenu />
+            {authUser && <AuthUserHeaderInfo />}
         </header>
     );
 };

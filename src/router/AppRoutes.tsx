@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Routes, Route} from "react-router-dom";
-import {urlEndpoints} from "./urlEndpoints.ts";
+import {urlEndpoints} from "./constans/urlEndpoints.ts";
 import {MainTemplate} from "../templates/main-template/MainTemplate.tsx";
 import {HomePage} from "../pages/home-page/HomePage.tsx";
 import {AuthPage} from "../pages/auth-page/AuthPage.tsx";
