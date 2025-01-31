@@ -17,15 +17,15 @@ axiosInstance.interceptors.request.use(requestObj => {
     return requestObj;
 });
 
-// axiosInstance.interceptors.response.use(respondeObj => {
-//     return respondeObj;
-// }, async (error) => {
-//     if (error.response.status === 401) {
-//         await refreshAuth();
-//     }
-//
-//     return error;
-// });
+axiosInstance.interceptors.response.use(respondeObj => {
+    return respondeObj;
+}, async (error) => {
+    if (error.response.status === 401) {
+        await refreshAuth();
+    }
+
+    return error;
+});
 
 export const getLoginData = async (loginData: ILoginData): Promise<IAuthResponseWithTokens> => {
     const { data: userWithTokens } = await axiosInstance.post<IAuthResponseWithTokens>(urlEndpoints.login, loginData);
