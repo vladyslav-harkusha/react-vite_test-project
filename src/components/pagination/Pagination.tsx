@@ -8,9 +8,9 @@ type Props = {
 }
 
 export const Pagination: FC<Props> = memo(({ totalItems }) => {
-    const [searchParams, setSearchParams] = useSearchParams({ page: '1', limit: '20'});
+    const [searchParams, setSearchParams] = useSearchParams({ page: '1', limit: '15'});
     const currPage = searchParams.get('page') || '1';
-    const usersPerPage = searchParams.get('limit') || '20';
+    const usersPerPage = searchParams.get('limit') || '15';
 
     const handlePrevPage = () => {
         const prevPage = +currPage > 1 ? (+currPage - 1) : +currPage;

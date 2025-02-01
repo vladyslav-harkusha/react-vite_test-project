@@ -14,7 +14,7 @@ export const RecipesList: FC = () => {
 
     useEffect(() => {
         const currPage = searchParams.get('page') || '1';
-        const receiptsPerPage = searchParams.get('limit') || '20';
+        const receiptsPerPage = searchParams.get('limit') || '15';
         const chosenTag = searchParams.get('tagName') || '';
 
         dispatch(recipesActions.loadAllRecipes({
@@ -28,10 +28,13 @@ export const RecipesList: FC = () => {
     if (isRecipesLoading) return <Loader />;
 
     return (
-        <ul className='recipes-list'>
-            {recipes.map(recipe => (
-                <RecipeItem key={recipe.id} recipe={recipe} />
-            ))}
-        </ul>
+        <div>
+            <p className='recipes-list-description'>click on recipe item to see recipe details / click on #hashtag to search recipes by hashtag</p>
+            <ul className='recipes-list'>
+                {recipes.map(recipe => (
+                    <RecipeItem key={recipe.id} recipe={recipe} />
+                ))}
+            </ul>
+        </div>
     );
 };
