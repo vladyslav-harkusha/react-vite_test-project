@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
-import {getAllEntities} from "../../services/api.service.ts";
+import {getEntitiesBySearchParams, getEntityById, urlParamsType} from "../../services/api.service.ts";
 import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 import {IUser} from "../../models/IUser.ts";
 import {IUsersResponse} from "../../models/IUsersResponse.ts";
@@ -7,19 +7,30 @@ import {IUsersResponse} from "../../models/IUsersResponse.ts";
 type UsersStateType = {
     users: IUser[];
     isUsersLoading: boolean;
+    currentUser: IUser | null;
 }
 
-const initialUsersState: UsersStateType = { users: [], isUsersLoading: false };
+const initialUsersState: UsersStateType = { users: [], isUsersLoading: false, currentUser: null };
 
-const loadAllUsers = createAsyncThunk('loadAllUsers', async (_, thunkAPI) => {
+const loadAllUsers = createAsyncThunk('loadAllUsers', async (urlParams: urlParamsType, thunkAPI) => {
     try {
-        const { users } = await getAllEntities<IUsersResponse>(urlEndpoints.allUsers);
+        const { users } = await getEntitiesBySearchParams<IUsersResponse>(urlParams);
 
         return thunkAPI.fulfillWithValue(users);
     } catch (e) {
         return thunkAPI.rejectWithValue(`Fetch users error: ${e}`);
     }
 });
+
+const loadUserById = createAsyncThunk('loadUserById', async(userId: string, thunkAPI) => {
+    try {
+        const currentUser = await getEntityById<IUser>(urlEndpoints.allUsers, userId);
+
+        return thunkAPI.fulfillWithValue(currentUser);
+    } catch (e) {
+        return thunkAPI.rejectWithValue(`Fetch user error: ${e}`);
+    }
+})
 
 export const usersSlice = createSlice({
     name: 'usersSlice',
@@ -37,12 +48,19 @@ export const usersSlice = createSlice({
             console.log(state);
             console.log(action);
         })
-        .addMatcher(isFulfilled(loadAllUsers), (state) => {
+        .addCase(loadUserById.fulfilled, (state, action: PayloadAction<IUser>) => {
+            state.currentUser = action.payload;
+        })
+        .addCase(loadUserById.rejected, (state, action) => {
+            console.log(state);
+            console.log(action);
+        })
+        .addMatcher(isFulfilled(loadAllUsers, loadUserById), (state) => {
             state.isUsersLoading = false;
         })
-        .addMatcher(isPending(loadAllUsers), (state) => {
+        .addMatcher(isPending(loadAllUsers, loadUserById), (state) => {
             state.isUsersLoading = true;
         })
 });
 
-export const usersActions = { ...usersSlice.actions, loadAllUsers };
+export const usersActions = { ...usersSlice.actions, loadAllUsers, loadUserById };

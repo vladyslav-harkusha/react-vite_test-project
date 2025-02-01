@@ -14,23 +14,22 @@ export const AppRoutes: FC = () => {
     const { auth, home, allUsers, userById, allRecipes, recipeById } = urlEndpoints;
     const { authUser } = useAppSelector(state => state.authStoreSlice);
 
+    console.log(authUser)
     return (
         <Routes>
             <Route path={home} element={ <MainLayout /> } >
                 <Route index element={ <HomePage /> } />
                 <Route path={auth} element={ <AuthPage /> } />
-                { authUser
-                    ? <>
+                <Route path='/*' element={<Navigate to={auth} replace />} />
+                { authUser &&
+                     <>
                         <Route path={allUsers} element={ <UsersPage /> } />
                         <Route path={userById} element={ <UserDetailsPage /> } />
                         <Route path={allRecipes} element={ <RecipesPage /> } />
                         <Route path={recipeById} element={ <RecipeDetailsPage /> } />
-                      </>
-
-                    : <Route path='/*' element={<Navigate to={auth}/>} />
+                     </>
                 }
             </Route>
         </Routes>
     );
 };
-

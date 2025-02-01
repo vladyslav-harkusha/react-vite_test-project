@@ -48,8 +48,22 @@ export const refreshAuth = async (): Promise<IRefreshTokensPair> => {
     return newTokens;
 };
 
-export const getAllEntities = async <T>(endpoint: string) => {
-    const response = await axiosInstance.get<T>(endpoint);
+export type urlParamsType = {
+    endpoint: string;
+    search: string
+    page: number;
+    limit: number;
+}
+
+export const getEntitiesBySearchParams = async <T>(urlParams: urlParamsType) => {
+    const { endpoint, search, page, limit } = urlParams;
+    const skip = (page - 1) * limit;
+    const response = await axiosInstance.get<T>(`${endpoint + search}?skip=${skip}&limit=${limit}`);
+    return response.data as T;
+};
+
+export const getEntityById = async <T>(endpoint: string, id: string) => {
+    const response = await axiosInstance.get<T>(`${endpoint}/${id}`);
     return response.data as T;
 };
 
