@@ -30,7 +30,7 @@ const loadUserById = createAsyncThunk('loadUserById', async(userId: string, thun
     } catch (e) {
         return thunkAPI.rejectWithValue(`Fetch user error: ${e}`);
     }
-})
+});
 
 export const usersSlice = createSlice({
     name: 'usersSlice',

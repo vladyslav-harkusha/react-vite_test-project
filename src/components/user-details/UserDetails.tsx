@@ -3,9 +3,10 @@ import './UserDetails.scss';
 import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
 import {useParams} from "react-router-dom";
 import {usersActions} from "../../redux/slices/usersSlice.ts";
+import {Loader} from "../UI/loader/Loader.tsx";
 
 export const UserDetails: FC = () => {
-    const { currentUser } = useAppSelector(state => state.usersStoreSlice);
+    const { currentUser, isUsersLoading } = useAppSelector(state => state.usersStoreSlice);
     const dispatch = useAppDispatch();
     const { userId } = useParams();
 
@@ -13,9 +14,8 @@ export const UserDetails: FC = () => {
         if (userId) dispatch(usersActions.loadUserById(userId));
     }, []);
 
-    if (!currentUser) {
-        return <h3>user not found</h3>
-    }
+    if (isUsersLoading) return <Loader />;
+    if (!currentUser) return <h2>user is not found</h2>;
 
     return (
         <>
