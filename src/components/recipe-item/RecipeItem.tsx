@@ -21,6 +21,7 @@ export const RecipeItem: FC<Props> = ({ recipe }) => {
     const handleTagClick = (recipeTag: string) => {
         setSearchParams(prev => {
             prev.set('tagName', `/tag/${recipeTag}`);
+            prev.set('page', '1');
             return prev;
         });
     };

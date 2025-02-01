@@ -31,9 +31,10 @@ export const Pagination: FC<Props> = memo(({ totalItems }) => {
     const handlePerPage = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchParams(prev => {
             prev.set('limit', String(event.target.value));
-            return prev}
-        );
-    }
+            prev.set('page', '1');
+            return prev
+        });
+    };
 
     return (
         <div className='pagination'>
