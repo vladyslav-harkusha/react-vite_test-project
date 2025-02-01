@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {Header} from "../../components/header/Header.tsx";
 import {Outlet} from "react-router-dom";
-import './MainTemplate.scss';
+import './MainLayout.scss';
 
-export const MainTemplate: FC = () => {
+export const MainLayout: FC = () => {
     return (
         <div className='app-wrapper'>
             <Header />

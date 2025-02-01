@@ -13,7 +13,7 @@ import {authFormValidator} from "../validators/authForm.validator.ts";
 
 export const AuthForm = () => {
     const {
-        handleSubmit, register, reset, formState: { errors }, setValue
+        handleSubmit, register, reset, formState: { errors, isValid }, setValue
     } = useForm<IAuthFormData>({
         mode: "all",
         resolver: joiResolver(authFormValidator),
@@ -23,7 +23,8 @@ export const AuthForm = () => {
     const dispatch = useAppDispatch();
 
     const handleSubmitCallback = (formData: ILoginData) => {
-        console.log('ddd')
+        if (!isValid) return;
+
         dispatch(authActions.logInUser(formData));
         reset();
     };
@@ -49,37 +50,39 @@ export const AuthForm = () => {
 
     return (
         <>
-            <h4>You can enter username and password manually or choose user in selection menu</h4>
-
             <form onSubmit={handleSubmit(handleSubmitCallback)} className='auth-form'>
-                <div className='inputs-wrapper'>
-                    <label>
-                        <p>username: </p>
-                        {errors.username && <span className='input-error-message'>{errors.username.message}</span>}
-                        <input type="text" {...register('username', { onChange: handleOnChangeInputs })} />
-                    </label>
+                <h4 className='title'>You can enter username and password manually or choose user in selection menu</h4>
 
-                    <label>
-                        <p>password: </p>
-                        {errors.password && <span className='input-error-message'>{errors.password.message}</span>}
-                        <input type="text" {...register('password', { onChange: handleOnChangeInputs })} />
-                    </label>
+                <div className='form-wrapper'>
+                    <div className='inputs-wrapper'>
+                        <label>
+                            <p>username: </p>
+                            {errors.username && <span className='input-error-message'>{errors.username.message}</span>}
+                            <input type="text" {...register('username', {onChange: handleOnChangeInputs})} />
+                        </label>
 
-                    {isAuthError && <p className='auth-error-message'>Your username or password is incorrect</p>}
+                        <label>
+                            <p>password: </p>
+                            {errors.password && <span className='input-error-message'>{errors.password.message}</span>}
+                            <input type="text" {...register('password', {onChange: handleOnChangeInputs})} />
+                        </label>
+
+                        {isAuthError && <p className='auth-error-message'>Your username or password is incorrect</p>}
+                    </div>
+
+                    <label className='select-label'>
+                        <p>Choose user</p>
+                        <select {...register('usersSelect', {
+                            onChange: handleOnChangeSelect,
+                        })}>
+                            {authUsersData.map(user => (
+                                <option key={user.nameOfUser}>{user.nameOfUser}</option>
+                            ))}
+                        </select>
+                    </label>
                 </div>
+                <MainButton buttonText='Log in' isDisabled={!isValid} />
 
-                <label className='select-label'>
-                    <p>Choose user</p>
-                    <select {...register('usersSelect', {
-                        onChange: handleOnChangeSelect,
-                    })}>
-                        {authUsersData.map(user => (
-                            <option key={user.nameOfUser}>{user.nameOfUser}</option>
-                        ))}
-                    </select>
-                </label>
-
-                <MainButton buttonText='Log in' />
             </form>
         </>
     );

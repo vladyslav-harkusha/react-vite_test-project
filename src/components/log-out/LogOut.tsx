@@ -3,6 +3,7 @@ import {FC, useCallback} from "react";
 import {authActions} from "../../redux/slices/authSlice.ts";
 import {useAppDispatch} from "../../redux/store.ts";
 import {IAuthResponseWithTokens} from "../../models/IAuthResponseWithTokens.ts";
+import './LogOut.scss';
 
 type Props = {
     authUser: IAuthResponseWithTokens;
@@ -19,10 +20,14 @@ export const LogOut: FC<Props> = ({ authUser }) => {
 
     return (
         <div className='log-out'>
-            <h3>Hello, {authUser.firstName} {authUser.lastName}, thanks for authentication</h3>
+            <h3 className='title-greeting'>
+                Hello, {authUser.firstName} {authUser.lastName}, now you have access to Users and Recipes pages
+            </h3>
 
-            <p>Press button to log out from this App</p>
-            <MainButton buttonText='Log out' buttonOnclick={handleLogOut} />
+            <div className='wrapper'>
+                <p>You can log out from this App</p>
+                <MainButton buttonText='Log out' buttonOnclick={handleLogOut}/>
+            </div>
         </div>
     );
 };

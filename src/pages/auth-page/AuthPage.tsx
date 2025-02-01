@@ -9,7 +9,7 @@ export const AuthPage: FC = () => {
 
     return (
         <div className='auth-page'>
-            <h2 className='title'>Auth page</h2>
+            <h2 className='auth-page-title'>Auth page</h2>
             {authUser
                 ? <LogOut authUser={authUser} />
                 : <AuthForm />
