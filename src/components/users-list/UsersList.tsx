@@ -21,9 +21,9 @@ export const UsersList: FC = () => {
     if (isUsersLoading) return <Loader />;
 
     return (
-        <div>
+        <div className='users-list'>
             <p className='users-list-description'>click on user item to see user details</p>
-            <ul className='users-list'>
+            <ul>
                 {users.map(user => (
                     <UserItem key={user.id} user={user} />
                 ))}

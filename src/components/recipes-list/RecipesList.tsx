@@ -28,9 +28,9 @@ export const RecipesList: FC = () => {
     if (isRecipesLoading) return <Loader />;
 
     return (
-        <div>
+        <div className='recipes-list'>
             <p className='recipes-list-description'>click on recipe item to see recipe details / click on #hashtag to search recipes by hashtag</p>
-            <ul className='recipes-list'>
+            <ul>
                 {recipes.map(recipe => (
                     <RecipeItem key={recipe.id} recipe={recipe} />
                 ))}

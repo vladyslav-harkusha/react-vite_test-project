@@ -1,9 +1,9 @@
-.recipes-list-description {
-    text-align: center;
-    margin-bottom: 5px;
-    color: gray;
-}
-
 .recipes-list {
     overflow-y: auto;
+
+    .recipes-list-description {
+        text-align: center;
+        margin-bottom: 5px;
+        color: gray;
+    }
 }
