@@ -58,21 +58,21 @@ export const AuthForm = () => {
                         <label>
                             <p>username: </p>
                             {errors.username && <span className='input-error-message'>{errors.username.message}</span>}
-                            <input type="text" {...register('username', {onChange: handleOnChangeInputs})} />
+                            <input type="text" className='auth-form-input' {...register('username', {onChange: handleOnChangeInputs})} />
                         </label>
 
                         <label>
                             <p>password: </p>
                             {errors.password && <span className='input-error-message'>{errors.password.message}</span>}
-                            <input type="text" {...register('password', {onChange: handleOnChangeInputs})} />
+                            <input type="text" className='auth-form-input' {...register('password', {onChange: handleOnChangeInputs})} />
                         </label>
 
                         {isAuthError && <p className='auth-error-message'>Your username or password is incorrect</p>}
                     </div>
 
                     <label className='select-label'>
-                        <p>Choose user</p>
-                        <select {...register('usersSelect', {
+                        <p>choose user:</p>
+                        <select className='auth-form-select' {...register('usersSelect', {
                             onChange: handleOnChangeSelect,
                         })}>
                             {authUsersData.map(user => (

@@ -1,5 +1,6 @@
 export const urlEndpoints = {
     home: '',
+    authPage: '/auth-page',
     auth: '/auth',
     login: '/auth/login',
     refresh: '/auth/refresh',

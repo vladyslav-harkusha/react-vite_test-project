@@ -11,7 +11,7 @@ import {RecipeDetailsPage} from "../pages/recipe-details-page/RecipeDetailsPage.
 import {useAppSelector} from "../redux/store.ts";
 
 export const AppRoutes: FC = () => {
-    const { auth, home, allUsers, userById, allRecipes, recipeById } = urlEndpoints;
+    const { authPage, home, allUsers, userById, allRecipes, recipeById } = urlEndpoints;
     const { authUser } = useAppSelector(state => state.authStoreSlice);
 
     console.log(authUser)
@@ -19,8 +19,8 @@ export const AppRoutes: FC = () => {
         <Routes>
             <Route path={home} element={ <MainLayout /> } >
                 <Route index element={ <HomePage /> } />
-                <Route path={auth} element={ <AuthPage /> } />
-                <Route path='/*' element={<Navigate to={auth} replace />} />
+                <Route path={authPage} element={ <AuthPage /> } />
+                <Route path='/*' element={<Navigate to={authPage} replace />} />
                 { authUser &&
                      <>
                         <Route path={allUsers} element={ <UsersPage /> } />

@@ -41,7 +41,7 @@ export const RecipeDetails: FC = () => {
                 </div>
             </div>
 
-            <Link to={`${urlEndpoints.allUsers}/${userId}`} className='link-to-author'>Go to recipe author page</Link>
+            <Link to={`${urlEndpoints.allUsers}/${userId}`} className='link-to-author'>Go to recipe author page {`>>`}</Link>
         </div>
     );
 };

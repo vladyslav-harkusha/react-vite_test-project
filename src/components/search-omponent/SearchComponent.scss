@@ -1,0 +1,20 @@
+.search-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+
+    .app-search {
+        padding: 6px 10px;
+        width: 400px;
+        outline: none;
+        border: 2px solid teal;
+        border-radius: 8px;
+        font-size: 18px;
+        color: #005252;
+
+        &:focus {
+            border-color: #ffb700;
+        }
+    }
+}
