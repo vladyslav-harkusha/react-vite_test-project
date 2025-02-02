@@ -11,7 +11,9 @@ export const HomePage:FC = () => {
     return (
         <div className='home-page'>
             <h2 className='home-page-title'>Home page</h2>
-            <p className='home-page-text'>This test application is created to practice React, TypeScript and Redux</p>
+            <p className='home-page-text'>
+                This test application is created to practice <span>React</span>, <span>TypeScript</span> and <span>Redux</span>
+            </p>
             <Loader />
 
             {!authUser &&
