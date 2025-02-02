@@ -8,7 +8,7 @@ import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 import {useSearchParams} from "react-router-dom";
 
 export const RecipesList: FC = () => {
-    const { recipes, isRecipesLoading } = useAppSelector(store => store.recipesStoreSlice);
+    const { paginatedRecipes, isRecipesLoading } = useAppSelector(store => store.recipesStoreSlice);
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
 
@@ -17,7 +17,7 @@ export const RecipesList: FC = () => {
         const receiptsPerPage = searchParams.get('limit') || '15';
         const chosenTag = searchParams.get('tagName') || '';
 
-        dispatch(recipesActions.loadAllRecipes({
+        dispatch(recipesActions.loadPaginatedRecipes({
             endpoint: urlEndpoints.allRecipes,
             search: chosenTag,
             page: +currPage,
@@ -31,7 +31,7 @@ export const RecipesList: FC = () => {
         <div className='recipes-list'>
             <p className='recipes-list-description'>click on recipe item to see recipe details / click on #hashtag to search recipes by hashtag</p>
             <ul>
-                {recipes.map(recipe => (
+                {paginatedRecipes.map(recipe => (
                     <RecipeItem key={recipe.id} recipe={recipe} />
                 ))}
             </ul>

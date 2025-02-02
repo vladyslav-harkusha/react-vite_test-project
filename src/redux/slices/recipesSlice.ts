@@ -5,14 +5,14 @@ import {IRecipe} from "../../models/IRecipe.ts";
 import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 
 type RecipesStateType = {
-    recipes: IRecipe[];
+    paginatedRecipes: IRecipe[];
     isRecipesLoading: boolean;
     currentRecipe: IRecipe | null;
 }
 
-const initialRecipesState: RecipesStateType = { recipes: [], isRecipesLoading: false, currentRecipe: null };
+const initialRecipesState: RecipesStateType = { paginatedRecipes: [], isRecipesLoading: false, currentRecipe: null };
 
-const loadAllRecipes = createAsyncThunk('loadAllRecipes', async (params: urlParamsType, thunkAPI) => {
+const loadPaginatedRecipes = createAsyncThunk('loadPaginatedRecipes', async (params: urlParamsType, thunkAPI) => {
     try {
         const { recipes } = await getEntitiesByUrlParams<IRecipesResponse>(params);
 
@@ -41,10 +41,10 @@ export const recipesSlice = createSlice({
         }
     },
     extraReducers: builder => builder
-        .addCase(loadAllRecipes.fulfilled, (state, action: PayloadAction<IRecipe[]>) => {
-            state.recipes = action.payload;
+        .addCase(loadPaginatedRecipes.fulfilled, (state, action: PayloadAction<IRecipe[]>) => {
+            state.paginatedRecipes = action.payload;
         })
-        .addCase(loadAllRecipes.rejected, (state, action) => {
+        .addCase(loadPaginatedRecipes.rejected, (state, action) => {
             console.log(state);
             console.log(action);
         })
@@ -55,12 +55,12 @@ export const recipesSlice = createSlice({
             console.log(state);
             console.log(action);
         })
-        .addMatcher(isFulfilled(loadAllRecipes, loadRecipeById), (state) => {
+        .addMatcher(isFulfilled(loadPaginatedRecipes, loadRecipeById), (state) => {
             state.isRecipesLoading = false;
         })
-        .addMatcher(isPending(loadAllRecipes, loadRecipeById), (state) => {
+        .addMatcher(isPending(loadPaginatedRecipes, loadRecipeById), (state) => {
             state.isRecipesLoading = true;
         })
 });
 
-export const recipesActions = { ...recipesSlice.actions, loadAllRecipes, loadRecipeById };
+export const recipesActions = { ...recipesSlice.actions, loadPaginatedRecipes, loadRecipeById };

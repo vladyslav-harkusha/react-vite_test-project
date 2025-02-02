@@ -23,7 +23,7 @@ export const RecipeDetails: FC = () => {
         <div className='recipe-details'>
             <h3 className='title'>recipe №{id}: {name}</h3>
             <div className='wrapper'>
-                <img className='image' src={image} alt=""/>
+                <img className='image' src={image} alt={name}/>
                 <div className='instructions'>
                     <ul className='ingredients-list'>
                         <p>ingredients:</p>
