@@ -2,7 +2,7 @@
     background-color: teal;
     color: #ffb700;
     margin: 3px;
-    padding: 3px 20px;
+    padding: 4px 20px;
     letter-spacing: 2px;
     border-radius: 10px;
     cursor: pointer;
@@ -15,5 +15,8 @@
 
     .user-name {
         display: inline-block;
+    }
+    span {
+        color: lightblue;
     }
 }

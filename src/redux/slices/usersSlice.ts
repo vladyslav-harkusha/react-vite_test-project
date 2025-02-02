@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
-import {getEntitiesBySearchParams, getEntityById, urlParamsType} from "../../services/api.service.ts";
+import {getEntitiesByUrlParams, getEntityById, urlParamsType} from "../../services/api.service.ts";
 import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
 import {IUser} from "../../models/IUser.ts";
 import {IUsersResponse} from "../../models/IUsersResponse.ts";
@@ -14,7 +14,7 @@ const initialUsersState: UsersStateType = { users: [], isUsersLoading: false, cu
 
 const loadAllUsers = createAsyncThunk('loadAllUsers', async (urlParams: urlParamsType, thunkAPI) => {
     try {
-        const { users } = await getEntitiesBySearchParams<IUsersResponse>(urlParams);
+        const { users } = await getEntitiesByUrlParams<IUsersResponse>(urlParams);
 
         return thunkAPI.fulfillWithValue(users);
     } catch (e) {

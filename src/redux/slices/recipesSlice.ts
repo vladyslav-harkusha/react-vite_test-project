@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, isFulfilled, isPending, PayloadAction} from "@reduxjs/toolkit";
-import {getEntitiesBySearchParams, getEntityById, urlParamsType} from "../../services/api.service.ts";
+import {getEntitiesByUrlParams, getEntityById, urlParamsType} from "../../services/api.service.ts";
 import {IRecipesResponse} from "../../models/IRecipesResponse.ts";
 import {IRecipe} from "../../models/IRecipe.ts";
 import {urlEndpoints} from "../../router/constans/urlEndpoints.ts";
@@ -14,7 +14,7 @@ const initialRecipesState: RecipesStateType = { recipes: [], isRecipesLoading: f
 
 const loadAllRecipes = createAsyncThunk('loadAllRecipes', async (params: urlParamsType, thunkAPI) => {
     try {
-        const { recipes } = await getEntitiesBySearchParams<IRecipesResponse>(params);
+        const { recipes } = await getEntitiesByUrlParams<IRecipesResponse>(params);
 
         return thunkAPI.fulfillWithValue(recipes);
     } catch (e) {
