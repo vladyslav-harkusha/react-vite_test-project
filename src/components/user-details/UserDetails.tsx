@@ -19,7 +19,7 @@ export const UserDetails: FC = () => {
             dispatch(usersActions.loadUserById(userId));
             dispatch(recipesActions.loadPaginatedRecipes({
                 endpoint: urlEndpoints.allRecipes,
-                search: '',
+                search: '?',
                 page: 1,
                 limit: 50,
             }));
