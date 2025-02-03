@@ -22,6 +22,11 @@
         background-color: lightblue;
         padding: 10px;
         border-radius: 10px;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: #ffb700;
+        }
     }
 
     .wrapper {

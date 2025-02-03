@@ -12,7 +12,7 @@ type UsersStateType = {
 
 const initialUsersState: UsersStateType = { users: [], isUsersLoading: false, currentUser: null };
 
-const loadAllUsers = createAsyncThunk('loadAllUsers', async (urlParams: urlParamsType, thunkAPI) => {
+const loadPaginatedUsers = createAsyncThunk('loadAllUsers', async (urlParams: urlParamsType, thunkAPI) => {
     try {
         const { users } = await getEntitiesByUrlParams<IUsersResponse>(urlParams);
 
@@ -41,10 +41,10 @@ export const usersSlice = createSlice({
         },
     },
     extraReducers: builder => builder
-        .addCase(loadAllUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {
+        .addCase(loadPaginatedUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {
             state.users = action.payload;
         })
-        .addCase(loadAllUsers.rejected, (state, action) => {
+        .addCase(loadPaginatedUsers.rejected, (state, action) => {
             console.log(state);
             console.log(action);
         })
@@ -55,12 +55,12 @@ export const usersSlice = createSlice({
             console.log(state);
             console.log(action);
         })
-        .addMatcher(isFulfilled(loadAllUsers, loadUserById), (state) => {
+        .addMatcher(isFulfilled(loadPaginatedUsers, loadUserById), (state) => {
             state.isUsersLoading = false;
         })
-        .addMatcher(isPending(loadAllUsers, loadUserById), (state) => {
+        .addMatcher(isPending(loadPaginatedUsers, loadUserById), (state) => {
             state.isUsersLoading = true;
         })
 });
 
-export const usersActions = { ...usersSlice.actions, loadAllUsers, loadUserById };
+export const usersActions = { ...usersSlice.actions, loadPaginatedUsers, loadUserById };

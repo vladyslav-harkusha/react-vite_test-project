@@ -21,7 +21,7 @@ export const LogOut: FC<Props> = ({ authUser }) => {
     return (
         <div className='log-out'>
             <h3 className='title-greeting'>
-                Hello, {authUser.firstName} {authUser.lastName}, now you have access to Users and Recipes pages
+                Hello, <span>{authUser.firstName} {authUser.lastName}</span>, now you have access to Users and Recipes pages
             </h3>
 
             <div className='wrapper'>

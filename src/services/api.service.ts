@@ -17,10 +17,10 @@ axiosInstance.interceptors.request.use(requestObj => {
     return requestObj;
 });
 
-axiosInstance.interceptors.response.use(respondeObj => {
-    return respondeObj;
+axiosInstance.interceptors.response.use(responseObj => {
+    return responseObj;
 }, async (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && localStorage.getItem('dummyRefreshToken')) {
         await refreshAuth();
     }
 

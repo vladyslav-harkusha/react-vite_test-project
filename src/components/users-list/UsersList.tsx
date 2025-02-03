@@ -16,7 +16,7 @@ export const UsersList: FC = () => {
         const currPage = searchParams.get('page') || '1';
         const usersPerPage = searchParams.get('limit') || '15';
         const usersSearch = searchParams.get('searchParam') || '?';
-        dispatch(usersActions.loadAllUsers({endpoint: urlEndpoints.allUsers, search: usersSearch, page: +currPage, limit: +usersPerPage}));
+        dispatch(usersActions.loadPaginatedUsers({endpoint: urlEndpoints.allUsers, search: usersSearch, page: +currPage, limit: +usersPerPage}));
     }, [searchParams]);
 
     if (isUsersLoading) return <Loader />;
