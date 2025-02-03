@@ -16,7 +16,7 @@ export const RecipeDetails: FC = () => {
     }, []);
 
     if (isRecipesLoading) return <Loader />;
-    if (!currentRecipe) return <h2>recipe is not found</h2>
+    if (!currentRecipe) return <h2>recipe with id = {recipeId} is not found</h2>
     const { name, userId, id, image, ingredients, instructions } = currentRecipe;
 
     return (

@@ -15,14 +15,17 @@ export const UsersList: FC = () => {
     useEffect(() => {
         const currPage = searchParams.get('page') || '1';
         const usersPerPage = searchParams.get('limit') || '15';
-        dispatch(usersActions.loadAllUsers({endpoint: urlEndpoints.allUsers, search: '', page: +currPage, limit: +usersPerPage}));
+        const usersSearch = searchParams.get('searchParam') || '?';
+        dispatch(usersActions.loadAllUsers({endpoint: urlEndpoints.allUsers, search: usersSearch, page: +currPage, limit: +usersPerPage}));
     }, [searchParams]);
 
     if (isUsersLoading) return <Loader />;
 
     return (
         <div className='users-list'>
-            <p className='users-list-description'>click on user item to see user details</p>
+            <p className='users-list-description'>
+                {users.length ? 'click on user item to see user details' : 'no users found'}
+            </p>
             <ul>
                 {users.map(user => (
                     <UserItem key={user.id} user={user} />

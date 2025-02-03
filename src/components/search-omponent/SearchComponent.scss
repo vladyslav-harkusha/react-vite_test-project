@@ -4,6 +4,18 @@
     justify-content: center;
     gap: 20px;
 
+    .search-label {
+        color: #5C5EDC;
+        font-weight: bold;
+
+        span {
+            font-weight: normal;
+            font-style: italic;
+            color: teal;
+            font-size: 14px;
+        }
+    }
+
     .app-search {
         padding: 6px 10px;
         width: 400px;

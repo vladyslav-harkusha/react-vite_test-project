@@ -31,7 +31,7 @@ export const UserDetails: FC = () => {
     }, [paginatedRecipes]);
 
     if (isUsersLoading) return <Loader />;
-    if (!currentUser) return <h2>user is not found</h2>;
+    if (!currentUser) return <h2>user with id = {userId} is not found</h2>;
     const { id, firstName, lastName, gender, email, phone, birthDate, image } = currentUser;
 
     return (

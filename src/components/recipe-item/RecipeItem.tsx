@@ -20,13 +20,13 @@ export const RecipeItem: FC<Props> = ({ recipe }) => {
 
     const handleTagClick = (recipeTag: string) => {
         setSearchParams(prev => {
-            prev.set('tagName', `/tag/${recipeTag}`);
+            prev.set('searchParam', `/tag/${recipeTag}?`);
             prev.set('page', '1');
             return prev;
         });
     };
 
-    const hashTag = searchParams.get('tagName') || '';
+    const hashTag = searchParams.get('searchParam') || '';
 
     return (
         <li className='recipe-item'>
@@ -36,7 +36,7 @@ export const RecipeItem: FC<Props> = ({ recipe }) => {
                     <li
                         key={tag}
                         onClick={() => handleTagClick(tag)}
-                        className={cn('recipe-tag-item', {'tag--active': tag === hashTag.slice(5)})}
+                        className={cn('recipe-tag-item', {'tag--active': tag === hashTag.slice(5, hashTag.length - 1)})}
                     >
                         #{tag}
                     </li>

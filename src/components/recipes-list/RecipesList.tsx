@@ -15,7 +15,7 @@ export const RecipesList: FC = () => {
     useEffect(() => {
         const currPage = searchParams.get('page') || '1';
         const receiptsPerPage = searchParams.get('limit') || '15';
-        const chosenTag = searchParams.get('tagName') || '';
+        const chosenTag = searchParams.get('searchParam') || '?';
 
         dispatch(recipesActions.loadPaginatedRecipes({
             endpoint: urlEndpoints.allRecipes,
@@ -29,7 +29,12 @@ export const RecipesList: FC = () => {
 
     return (
         <div className='recipes-list'>
-            <p className='recipes-list-description'>click on recipe item to see recipe details / click on #hashtag to search recipes by hashtag</p>
+            <p className='recipes-list-description'>
+                {paginatedRecipes.length
+                    ? 'click on recipe item to see recipe details / click on #hashtag to search recipes by hashtag'
+                    : 'no recipes found'
+                }
+            </p>
             <ul>
                 {paginatedRecipes.map(recipe => (
                     <RecipeItem key={recipe.id} recipe={recipe} />
